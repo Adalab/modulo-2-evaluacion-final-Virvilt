@@ -5,23 +5,35 @@ body {
   font-family: $font-main;
 }
 
-.cards {
-  gap: 1em;
+.cards_list {
+  display: flex;
+  list-style-type: none;
+  border: solid 1px white;
+  border-radius: 30px;
+  box-shadow: dimgray 10;
+  margin: 20px;
+  padding: 10px;
+  align-items: center;
 
-  .paletteCard {
-    padding: 1em;
-    cursor: pointer;
+  .card_item {
+    border-radius: 5px;
+    box-shadow: dimgray 10;
+    margin-top: 20px;
+    padding: 10px;
+    margin: 20px;
 
-    .colors {
-      display: flex;
-      list-style-type: none;
-      border: solid 5px white;
-      margin-top: 1rem;
+    .card_img {
+      width: 300px;
+      height: 200px;
+      align-content: center;
+      align-items: center;
+    }
 
-      .color {
-        width: 30px;
-        height: 30px;
-      }
+    .card_title {
+      font-size: 12px;
+      text-decoration: underline;
+      margin-bottom: 5px;
+      text-align: center;
     }
   }
 }
