@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>modulo-2-evaluacion-final-Virvilt</title>
+  <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./scss/main.scss" />
+  <link rel="icon" href="./images/favicon.png" />
+</head>
+
+<body>
+
+  <header class="header">
+    <h1 class="title">Personajes Películas Disney</h1>
+  </header>
+
+
+  <main class="content">
+    <form>
+      <label class="form__label" for="search_disney">
+        Buscador:
+        <input class="form__input-text js__searchInput" type="text" name="search" id="search" />
+      </label>
+
+      <input class="form__btn js__searchButton" type="submit" value="Buscar">
+    </form>
+
+    <div class="ranking">
+      <section class="cards_list">
+        <h2>Universo de Disney</h2>
+        <p>¿Cuál es tu favorito?</p>
+
+        <ul class="js__cardsUl cards">
+
+        </ul>
+      </section>
+
+      <section class="favourites">
+        <h2>Favoritos</h2>
+
+        <ul class="js__favouritesUl cards"></ul>
+      </section>
+    </div>
+
+  </main>
+
+
+
+
+  <script src="js/main.js"></script>
+</body>
+
+</html>

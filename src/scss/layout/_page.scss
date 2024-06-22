@@ -1,0 +1,27 @@
+body {
+  padding: 2rem;
+  height: 100vh;
+  background-color: $color-bg;
+  font-family: $font-main;
+}
+
+.cards {
+  gap: 1em;
+
+  .paletteCard {
+    padding: 1em;
+    cursor: pointer;
+
+    .colors {
+      display: flex;
+      list-style-type: none;
+      border: solid 5px white;
+      margin-top: 1rem;
+
+      .color {
+        width: 30px;
+        height: 30px;
+      }
+    }
+  }
+}
