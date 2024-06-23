@@ -1,59 +1,95 @@
 "use strict";
 
-// QUERY SELECTOR
+// -------------------QUERY SELECTOR-------------------
 
 const searchButton = document.querySelector(".js__searchButton");
 const searchInput = document.querySelector(".js__searchInput");
 const cardsUl = document.querySelector(".js__cardsUl");
 const favouritesUl = document.querySelector(".js__favouritesUl");
 
-// DATOS
+// -------------------DATOS-------------------
 
 let data = [];
 let favourites = [];
 
-// FUNCIONES
+// -------------------FUNCIONES-------------------
 
 function createHTMLCard(item) {
+  //Variable de las los personajes
   const html = `
-  <li class="card_item">
+  <li class="card_item js__cardsLi" data-id="${item._id}">
   <img class="card_img" src=${item.imageUrl}>
   <p class="card_title">${item.name}</p>
   </li>`;
   return html;
 }
 
-function renderCharacters(data) {
+function renderCharacters() {
   let html = "";
   for (let i = 0; i < data.length; i++) {
     html += createHTMLCard(data[i]);
   }
-  console.log(html);
+
   cardsUl.innerHTML = html;
+
+  const cardsLiAll = document.querySelectorAll(".js__cardsLi");
+  for (const oneCard of cardsLiAll) {
+    oneCard.addEventListener("click", clickCard);
+  }
+}
+//Funcion para "render" favoritos
+function renderFavourites() {
+  let html = "";
+  for (let i = 0; i < favourites.length; i++) {
+    html += createHTMLCard(favourites[i]);
+  }
+
+  favouritesUl.innerHTML = html;
+
+  // const cardsLiAll = document.querySelectorAll(".js__cardsLi");
+  // for (const oneCard of cardsLiAll) {
+  //   oneCard.addEventListener("click", clickCard);
+  // }
 }
 
-// FUNCIONES DE EVENTOS
+// -------------------FUNCIONES DE EVENTOS------------------
 
 function clickButton(ev) {
   ev.preventDefault();
 
   console.log(searchInput.value);
 }
+//Funcion para favoritos
+function clickCard(ev) {
+  ev.preventDefault();
 
-// EVENTOS
+  const clickedCardId = parseInt(ev.currentTarget.dataset.id);
 
-searchButton.addEventListener("click", clickButton);
+  const clickedCard = data.find((oneCard) => oneCard._id === clickedCardId);
 
-// CÓDIGO CUANDO CARGA LA PÁGINA
+  const clickedCardFavouriteIndex = favourites.findIndex(
+    (oneCard) => oneCard._id === clickedCardId
+  );
 
-fetch("https://api.disneyapi.dev/character?pageSize=50")
+  if (clickedCardFavouriteIndex === -1) {
+    console.log("Añadir a favoritos");
+    favourites.push(clickedCard);
+  } else {
+    favourites.splice(clickedCardFavouriteIndex, 1);
+    console.log("Eliminar de favoritos");
+  }
+  //Pintar las Cards de favortios
+  renderFavourites();
+  ev.currentTarget.classList.toggle("favourite");
+}
+
+// -------------------CÓDIGO CUANDO CARGA LA PÁGINA-------------------
+
+fetch("//api.disneyapi.dev/character")
   .then((response) => response.json())
   .then((dataFromFetch) => {
-    //console.log(dataFromFetch.data);
-
     data = dataFromFetch.data;
-
-    renderCharacters(data);
+    renderCharacters();
   });
 
 const favsFromLS = JSON.parse(localStorage.getItem("favs"));
@@ -64,30 +100,8 @@ if (favsFromLS !== null) {
   renderFavourites();
 }
 
-const singleItem = {
-  _id: 112,
-  films: ["Hercules (film)"],
-  shortFilms: [],
-  tvShows: ["Hercules (TV series)"],
-  videoGames: ["Kingdom Hearts III"],
-  parkAttractions: [],
-  allies: [],
-  enemies: [],
-  sourceUrl: "https://disney.fandom.com/wiki/Achilles_(Hercules)",
-  name: "Achilles",
-  imageUrl:
-    "https://static.wikia.nocookie.net/disney/images/d/d3/Vlcsnap-2015-05-06-23h04m15s601.png",
-  createdAt: "2021-04-12T01:31:30.547Z",
-  updatedAt: "2021-12-20T20:39:18.033Z",
-  url: "https://api.disneyapi.dev/characters/112",
-  __v: 0,
-};
+// -------------------EVENTOS-------------------
 
-/* cardsUl.innerHTML = `
-<li class="card_item">
-<img class="card_img" src=${singleItem.imageUrl}>
-<p class="card_title">${singleItem.name}</p>
-<p class="card_subtitle">${singleItem.films}</p>
-</li>`; */
+searchButton.addEventListener("click", clickButton);
 
 //  ev.preventDefault();
