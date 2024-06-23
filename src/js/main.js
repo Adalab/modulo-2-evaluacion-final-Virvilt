@@ -9,7 +9,28 @@ const favouritesUl = document.querySelector(".js__favouritesUl");
 
 // DATOS
 
+let data = [];
+let favourites = [];
+
 // FUNCIONES
+
+function createHTMLCard(item) {
+  const html = `
+  <li class="card_item">
+  <img class="card_img" src=${item.imageUrl}>
+  <p class="card_title">${item.name}</p>
+  </li>`;
+  return html;
+}
+
+function renderCharacters(data) {
+  let html = "";
+  for (let i = 0; i < data.length; i++) {
+    html += createHTMLCard(data[i]);
+  }
+  console.log(html);
+  cardsUl.innerHTML = html;
+}
 
 // FUNCIONES DE EVENTOS
 
@@ -24,6 +45,24 @@ function clickButton(ev) {
 searchButton.addEventListener("click", clickButton);
 
 // CÓDIGO CUANDO CARGA LA PÁGINA
+
+fetch("https://api.disneyapi.dev/character?pageSize=50")
+  .then((response) => response.json())
+  .then((dataFromFetch) => {
+    //console.log(dataFromFetch.data);
+
+    data = dataFromFetch.data;
+
+    renderCharacters(data);
+  });
+
+const favsFromLS = JSON.parse(localStorage.getItem("favs"));
+
+if (favsFromLS !== null) {
+  favourites = favsFromLS;
+
+  renderFavourites();
+}
 
 const singleItem = {
   _id: 112,
@@ -44,9 +83,11 @@ const singleItem = {
   __v: 0,
 };
 
-cardsUl.innerHTML = `
+/* cardsUl.innerHTML = `
 <li class="card_item">
 <img class="card_img" src=${singleItem.imageUrl}>
-<p class="card_title">${singleItem.name}</p></li>`;
+<p class="card_title">${singleItem.name}</p>
+<p class="card_subtitle">${singleItem.films}</p>
+</li>`; */
 
 //  ev.preventDefault();

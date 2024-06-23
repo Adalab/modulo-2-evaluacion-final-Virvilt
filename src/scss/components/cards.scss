@@ -1,0 +1,68 @@
+.cards_list {
+  background-color: rgb(240, 240, 240);
+  display: flex;
+  list-style-type: none;
+  border-radius: 15px;
+  margin: 30px 0 0 0;
+  padding: 10px;
+  align-items: center;
+  box-shadow: 1px 1px 3px 1px rgba(98, 98, 98, 0.3);
+
+  .card_item {
+    margin-inline-end: 20px;
+    border-radius: 5px;
+    margin-top: 20px;
+    padding: 10px;
+
+    .card_img {
+      width: 300px;
+      height: 200px;
+      align-content: center;
+      align-items: center;
+    }
+
+    .card_title {
+      font-family: "Zilla Slab", serif;
+      font-weight: 600;
+      font-style: normal;
+      color: rgb(68, 68, 68);
+      font-size: 17px;
+      text-decoration: none;
+      margin-bottom: 5px;
+      text-align: center;
+    }
+    .card_subtitle {
+      font-family: "Zilla Slab", serif;
+      font-weight: 400;
+      font-style: italic;
+      color: rgb(68, 68, 68);
+      font-size: 14px;
+      text-align: center;
+    }
+  }
+}
+
+.form__btn {
+  padding: 5px 15px;
+  font-size: 14px;
+  font-weight: regular;
+  color: white;
+  border: 0;
+  align-items: center;
+  align-content: center;
+  background-color: #ffb9b9;
+  box-shadow: 2px 0px 2px 0px rgba(201, 201, 201, 0.76);
+  border-radius: 5px;
+}
+
+// --------------------
+
+input {
+  padding: 5px 15px;
+  background-color: rgb(234, 234, 234);
+  border: 0;
+  border-radius: 5px;
+  margin: 4px;
+}
+
+//---------------
