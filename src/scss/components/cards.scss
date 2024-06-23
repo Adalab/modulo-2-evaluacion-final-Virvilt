@@ -1,24 +1,24 @@
 .cards_list {
-  background-color: rgb(240, 240, 240);
-  display: flex;
-  list-style-type: none;
   border-radius: 15px;
   margin: 30px 0 0 0;
-  padding: 10px;
-  align-items: center;
-  box-shadow: 1px 1px 3px 1px rgba(98, 98, 98, 0.3);
+  list-style-type: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 
   .card_item {
     margin-inline-end: 20px;
-    border-radius: 5px;
+    border-radius: 15px;
     margin-top: 20px;
     padding: 10px;
+    align-items: center;
+    background-color: rgb(240, 240, 240);
+    box-shadow: 1px 1px 3px 1px rgba(98, 98, 98, 0.3);
 
     .card_img {
-      width: 300px;
-      height: 200px;
+      width: 260px;
+      height: 180px;
       align-content: center;
-      align-items: center;
     }
 
     .card_title {
