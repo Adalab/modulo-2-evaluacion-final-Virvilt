@@ -14,10 +14,15 @@ let favourites = [];
 
 // -------------------FUNCIONES-------------------
 
-function createHTMLCard(character) {
+function createHTMLCard(character, isFavorite = false) {
+  let removeButton = "";
+  if (isFavorite) {
+    removeButton = `<a class="js__cardRemove card_remove" data-id="${character._id}">X</a>`;
+  }
   //Variable de las los personajes
   const html = `
   <li class="card_item js__cardsLi" data-id="${character._id}">
+  ${removeButton}
   <img class="card_img" src=${character.imageUrl}>
   <p class="card_title">${character.name}</p>
   </li>`;
@@ -58,10 +63,15 @@ function renderCharacters() {
 function renderFavourites() {
   let html = "";
   for (let i = 0; i < favourites.length; i++) {
-    html += createHTMLCard(favourites[i]);
+    html += createHTMLCard(favourites[i], true);
   }
 
   favouritesUl.innerHTML = html;
+
+  const favouritesAll = document.querySelectorAll(".js__cardRemove");
+  for (const oneFavourite of favouritesAll) {
+    oneFavourite.addEventListener("click", removeFavourites);
+  }
 
   // const cardsLiAll = document.querySelectorAll(".js__cardsLi");
   // for (const oneCard of cardsLiAll) {
@@ -97,16 +107,43 @@ function clickCard(ev) {
   if (clickedCardFavouriteIndex === -1) {
     console.log("Añadir a favoritos");
     favourites.push(clickedCard);
+
+    //Guardar las Cards en favortios (refresh)
+    localStorage.setItem("favoritos", JSON.stringify(favourites));
+
+    //Pintar las Cards de favoritos
+    renderFavourites();
+    ev.currentTarget.classList.toggle("favourite");
   } else {
     favourites.splice(clickedCardFavouriteIndex, 1);
-    console.log("Eliminar de favoritos");
-  }
-  //Guardar las Cards en favortios (refresh)
-  localStorage.setItem("favoritos", JSON.stringify(favourites));
 
-  //Pintar las Cards de favoritos
-  renderFavourites();
-  ev.currentTarget.classList.toggle("favourite");
+    //Guardar las Cards en favortios (refresh)
+    localStorage.setItem("favoritos", JSON.stringify(favourites));
+
+    //Pintar las Cards de favoritos
+    renderFavourites();
+
+    ev.currentTarget.classList.toggle("favourite");
+  }
+}
+
+//Funcion para eliminar cards en favoritos
+function removeFavourites(ev) {
+  ev.preventDefault();
+
+  const favoriteId = parseInt(ev.currentTarget.dataset.id);
+  const favouriteIndex = favourites.findIndex(
+    (oneFavorite) => oneFavorite._id === favoriteId
+  );
+  if (favouriteIndex !== -1) {
+    favourites.splice(favouriteIndex, 1);
+
+    //Guardar las Cards en favortios (refresh)
+    localStorage.setItem("favoritos", JSON.stringify(favourites));
+
+    //Pintar las Cards de favoritos
+    renderFavourites();
+  }
 }
 
 // ------------------- CÓDIGO CUANDO CARGA LA PÁGINA -------------------
