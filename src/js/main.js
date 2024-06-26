@@ -14,27 +14,44 @@ let favourites = [];
 
 // -------------------FUNCIONES-------------------
 
-function createHTMLCard(item) {
+function createHTMLCard(character) {
   //Variable de las los personajes
   const html = `
-  <li class="card_item js__cardsLi" data-id="${item._id}">
-  <img class="card_img" src=${item.imageUrl}>
-  <p class="card_title">${item.name}</p>
+  <li class="card_item js__cardsLi" data-id="${character._id}">
+  <img class="card_img" src=${character.imageUrl}>
+  <p class="card_title">${character.name}</p>
+  </li>`;
+  return html;
+}
+
+function createHTMLCardNotFound() {
+  //Variable de las los personajes
+  const html = `
+  <li class="card_item">
+  <img class="card_img" src="./images/notfound.png">
+  <p class="card_title">Not found :(</p>
   </li>`;
   return html;
 }
 
 function renderCharacters() {
   let html = "";
-  for (let i = 0; i < data.length; i++) {
-    html += createHTMLCard(data[i]);
-  }
 
-  cardsUl.innerHTML = html;
+  if (data.length > 0) {
+    for (let i = 0; i < data.length; i++) {
+      let character = data[i];
+      html += createHTMLCard(character);
+    }
 
-  const cardsLiAll = document.querySelectorAll(".js__cardsLi");
-  for (const oneCard of cardsLiAll) {
-    oneCard.addEventListener("click", clickCard);
+    cardsUl.innerHTML = html;
+
+    const cardsLiAll = document.querySelectorAll(".js__cardsLi");
+    for (const oneCard of cardsLiAll) {
+      oneCard.addEventListener("click", clickCard);
+    }
+  } else {
+    html += createHTMLCardNotFound();
+    cardsUl.innerHTML = html;
   }
 }
 //Funcion para "render" favoritos
@@ -58,6 +75,12 @@ function clickButton(ev) {
   ev.preventDefault();
 
   console.log(searchInput.value);
+  fetch(`//api.disneyapi.dev/character?name=${searchInput.value}`)
+    .then((response) => response.json())
+    .then((dataFromFetch) => {
+      data = dataFromFetch.data;
+      renderCharacters();
+    });
 }
 //Funcion para favoritos
 function clickCard(ev) {
@@ -78,12 +101,15 @@ function clickCard(ev) {
     favourites.splice(clickedCardFavouriteIndex, 1);
     console.log("Eliminar de favoritos");
   }
-  //Pintar las Cards de favortios
+  //Guardar las Cards en favortios (refresh)
+  localStorage.setItem("favoritos", JSON.stringify(favourites));
+
+  //Pintar las Cards de favoritos
   renderFavourites();
   ev.currentTarget.classList.toggle("favourite");
 }
 
-// -------------------CÓDIGO CUANDO CARGA LA PÁGINA-------------------
+// ------------------- CÓDIGO CUANDO CARGA LA PÁGINA -------------------
 
 fetch("//api.disneyapi.dev/character")
   .then((response) => response.json())
@@ -92,7 +118,7 @@ fetch("//api.disneyapi.dev/character")
     renderCharacters();
   });
 
-const favsFromLS = JSON.parse(localStorage.getItem("favs"));
+const favsFromLS = JSON.parse(localStorage.getItem("favoritos"));
 
 if (favsFromLS !== null) {
   favourites = favsFromLS;
