@@ -21,7 +21,6 @@ function createHTMLCard(character, isFavorite = false) {
   }
   let picture = "./images/img_notfound.png";
   if (character.imageUrl !== undefined) {
-    console.log(character.imageUrl);
     picture = character.imageUrl;
   }
 
@@ -79,11 +78,6 @@ function renderFavourites() {
   for (const oneFavourite of favouritesAll) {
     oneFavourite.addEventListener("click", removeFavourites);
   }
-
-  // const cardsLiAll = document.querySelectorAll(".js__cardsLi");
-  // for (const oneCard of cardsLiAll) {
-  //   oneCard.addEventListener("click", clickCard);
-  // }
 }
 
 // -------------------FUNCIONES DE EVENTOS------------------
@@ -91,7 +85,6 @@ function renderFavourites() {
 function clickButton(ev) {
   ev.preventDefault();
 
-  console.log(searchInput.value);
   fetch(`//api.disneyapi.dev/character?name=${searchInput.value}`)
     .then((response) => response.json())
     .then((dataFromFetch) => {
@@ -112,7 +105,6 @@ function clickCard(ev) {
   );
 
   if (clickedCardFavouriteIndex === -1) {
-    console.log("Añadir a favoritos");
     favourites.push(clickedCard);
 
     //Guardar las Cards en favortios (refresh)
@@ -127,7 +119,6 @@ function clickCard(ev) {
     //Guardar las Cards en favoritos (refresh)
     localStorage.setItem("favoritos", JSON.stringify(favourites));
 
-    //Pintar las Cards de favoritos
     renderFavourites();
 
     ev.currentTarget.classList.toggle("favourite");
@@ -145,10 +136,9 @@ function removeFavourites(ev) {
   if (favouriteIndex !== -1) {
     favourites.splice(favouriteIndex, 1);
 
-    //Guardar las Cards en favortios (refresh)
+    //Guardar las Cards en favoritos (refresh)
     localStorage.setItem("favoritos", JSON.stringify(favourites));
 
-    //Pintar las Cards de favoritos
     renderFavourites();
   }
 }
