@@ -19,18 +19,25 @@ function createHTMLCard(character, isFavorite = false) {
   if (isFavorite) {
     removeButton = `<a class="js__cardRemove card_remove" data-id="${character._id}">X</a>`;
   }
-  //Variable de las los personajes
+  let picture = "./images/img_notfound.png";
+  if (character.imageUrl !== undefined) {
+    console.log(character.imageUrl);
+    picture = character.imageUrl;
+  }
+
+  //Html de los personajes
   const html = `
   <li class="card_item js__cardsLi" data-id="${character._id}">
   ${removeButton}
-  <img class="card_img" src=${character.imageUrl}>
+  <img class="card_img" src=${picture}>
   <p class="card_title">${character.name}</p>
   </li>`;
+
   return html;
 }
 
 function createHTMLCardNotFound() {
-  //Variable de las los personajes
+  //Funcion de los personajes
   const html = `
   <li class="card_item">
   <img class="card_img" src="./images/notfound.png">
@@ -117,7 +124,7 @@ function clickCard(ev) {
   } else {
     favourites.splice(clickedCardFavouriteIndex, 1);
 
-    //Guardar las Cards en favortios (refresh)
+    //Guardar las Cards en favoritos (refresh)
     localStorage.setItem("favoritos", JSON.stringify(favourites));
 
     //Pintar las Cards de favoritos
