@@ -1,42 +1,82 @@
 .header {
-  background-image: url("/images/mickey_background.jpg");
-  background-color: rgb(250, 250, 250);
-  list-style-type: none;
-  border-radius: 12px;
-  padding: 10px;
-  margin: 30px;
-  background-color: turquoise;
-  box-shadow: 1px 1px 3px 1px rgba(162, 162, 162, 0.3);
-
+  background-image: url("/images/mickey_background.png");
+  background-color: #6dc6cc;
   background-position: center;
+  background-size: auto;
   background-repeat: no-repeat;
-  background-size: 1600px;
-  height: 50px;
-  display: inline;
+  height: 100%;
+  min-height: 200px;
+  display: flow-root;
 
   @media (min-width: 768px) {
-    min-height: 200px;
+    min-height: 400px;
     background-position: center;
     align-items: flex-end;
-    display: flex;
+    display: block;
     justify-content: center;
+  }
+
+  .title {
+    font-family: "Staatliches", sans-serif;
+    font-size: 50px;
+    color: aliceblue;
+    background-position: center;
+    background-size: auto;
+    background-repeat: no-repeat;
+    padding: 40px;
+    height: 100%;
+    min-height: 200px;
+    display: flow-root;
+
+    @media (min-width: 768px) {
+      min-height: 400px;
+      background-position: center;
+    }
   }
 }
 
-// //.hero {
-//   background-position: center;
-//   background-size: cover;
-//   background-position: 82%;
-//   width: 100%;
-//   height: 100%;
-//   min-height: 200px;
-//   display: flow-root;
+//---------------------------
 
-//   @media (min-width: 768px) {
-//     min-height: 900px;
-//     background-position: center;
-//     align-items: flex-end;
-//     display: flex;
-//     justify-content: center;
-//   }
-// }
+.form {
+  background-color: rgba(240, 248, 255, 0.369);
+  padding: 40px;
+  margin-top: 150px;
+
+  @media (min-width: 768px) {
+    margin-top: 0px;
+  }
+}
+
+.form__btn {
+  padding: 5px 15px;
+  font-size: 14px;
+  font-weight: regular;
+  color: white;
+  border: 0;
+  align-items: center;
+  align-content: center;
+  background-color: #ffb9b9;
+  box-shadow: 2px 0px 2px 0px rgba(201, 201, 201, 0.76);
+  border-radius: 5px;
+}
+
+.form__input-text {
+  width: 180px;
+  padding: 5px 15px;
+  background-color: rgba(255, 255, 255, 0.909);
+  border: 0;
+  border-radius: 5px;
+  margin: 4px;
+
+  @media (min-width: 768px) {
+    width: 340px;
+  }
+}
+
+input {
+  padding: 5px 15px;
+  background-color: rgb(234, 234, 234);
+  border: 0;
+  border-radius: 5px;
+  margin: 4px;
+}
