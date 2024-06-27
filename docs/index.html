@@ -6,65 +6,58 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>modulo-2-evaluacion-final-Virvilt</title>
   <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Zilla+Slab:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
+    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Staatliches&display=swap" rel="stylesheet">
 
-  <link rel="icon" href />
-  <link rel="stylesheet" href="./assets/main-62015576.css">
+  
+  <link rel="icon" href="./images/favicon.png" />
+  <link rel="stylesheet" href="./assets/index-dd524864.css">
 </head>
 
 <body>
-  <div class="page">
-    <header class="page__header">
-      <img src="./images/logo-adalab.png" alt="Adalab">
-    </header>
 
-    <main class="page__main">
-      <h2>Este es el starter kit de Adalab</h2>
-      <p>Lo usamos para aprender:</p>
-      <ul class="main__list">
-        <li>Sass</li>
-        <li>HTML partials</li>
-        <li>Gulp</li>
-        <li>y muchas cosas más</li>
-      </ul>
-      <p>Si quieres saber cúales son las rutas correctas para:</p>
-      <ul class="main__list">
-        <li>
-          una <code class="code">&lt;img /&gt;</code> mira el fichero
-          <code class="code">./src/html/partials/header.html</code>.
-        </li>
-        <li>
-          y para un <code class="code">background-image</code> mira el fichero
-          <code class="code">./src/html/scss/layout/_page.scss</code>.
-        </li>
-      </ul>
-      <p>
-        Si quieres saber cómo usar un partial HTML dentro de otro partial, busca en la carperta
-        <code class="code">./src/html/index.html</code> y
-        <code class="code">./src/html/partials/main.html</code>, y verás cómo estamos creando estos
-        enlaces:
-      </p>
-      <ul class="main__list">
-        <li>
-          <a class="link__adalab" href="https://adalab.es">Adalab</a>
+  <header class="header">
+    <h1 class="title">Personajes Películas Disney</h1>
 
-        </li>
-        <li>
-          <a class="{=$aClass}" href="./more-info.html">Más info del starter kit</a>
+    <form class="form">
+      <label class="form__label" for="search_disney">
+        Buscador:
+        <input class="form__input-text js__searchInput" type="text" name="search" id="search_disney"
+          placeholder="Nombre personaje" id="search" />
+      </label>
+      <input class="form__btn js__searchButton" type="submit" value="Buscar">
 
-        </li>
-      </ul>
-    </main>
+    </form>
+  </header>
 
-    <footer class="page__footer">
-      <small>
-        &copy; Todos los derechos reservados
-        <a class="link__adalab" href="https://adalab.es">Adalab</a>
+  <main class="content">
 
-      </small>
-    </footer>
 
-  </div>
-  <script src="./js/main.js"></script>
+    <div class="ranking">
+      <section class="cards_list_container">
+        <h2>Universo Disney</h2>
+        <p>¿Cuál es tu personaje favorito?</p>
+        <p><a href="#favourites"> Ver mis favoritos ☆</a></p>
+        <ul class="js__cardsUl cards_list"></ul>
+
+
+      </section>
+
+      <section class="favourites" id="favourites">
+        <h2>Favoritos</h2>
+
+        <ul class="js__favouritesUl cards_list"></ul>
+      </section>
+    </div>
+
+  </main>
+
+
+
+
+  <script src="js/main.js"></script>
 </body>
 
 </html>
