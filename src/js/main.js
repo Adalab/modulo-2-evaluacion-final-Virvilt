@@ -6,6 +6,7 @@ const searchButton = document.querySelector(".js__searchButton");
 const searchInput = document.querySelector(".js__searchInput");
 const cardsUl = document.querySelector(".js__cardsUl");
 const favouritesUl = document.querySelector(".js__favouritesUl");
+const nameButton = document.querySelector(".js__nameButton");
 
 // -------------------DATOS-------------------
 
@@ -24,12 +25,19 @@ function createHTMLCard(character, isFavorite = false) {
     picture = character.imageUrl;
   }
 
+  let hasGame = "No tiene videojuego";
+
+  if (character.videoGames.length > 0) {
+    hasGame = "tiene videojuegos";
+  }
+
   //Html de los personajes
   const html = `
   <li class="card_item js__cardsLi" data-id="${character._id}">
   ${removeButton}
   <img class="card_img" src=${picture}>
   <p class="card_title">${character.name}</p>
+  <p>${character.videoGames}${hasGame}</p>
   </li>`;
 
   return html;
@@ -143,6 +151,14 @@ function removeFavourites(ev) {
   }
 }
 
+function nameButtonAction(ev) {
+  ev.preventDefault();
+
+  for (let i = 0; i < data.length; i++) {
+    console.log(data[i].name);
+  }
+}
+
 // ------------------- CÓDIGO CUANDO CARGA LA PÁGINA -------------------
 
 fetch("//api.disneyapi.dev/character")
@@ -162,6 +178,6 @@ if (favsFromLS !== null) {
 
 // -------------------EVENTOS-------------------
 
-searchButton.addEventListener("click", clickButton);
+nameButton.addEventListener("click", nameButtonAction);
 
-//  ev.preventDefault();
+searchButton.addEventListener("click", clickButton);
